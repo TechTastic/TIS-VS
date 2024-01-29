@@ -46,7 +46,6 @@ pluginManagement {
 }
 
 include("common")
-include("fabric")
 include("forge")
 
-rootProject.name = "vs_addon_template"
+rootProject.name = "tis_3d_vs"
