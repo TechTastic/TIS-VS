@@ -3,6 +3,7 @@ package io.github.techtastic.tisvs
 import dev.architectury.registry.registries.DeferredRegister
 import io.github.techtastic.tisvs.module.TISVSModules
 import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
 
 object TISVS {
@@ -13,7 +14,7 @@ object TISVS {
 
     @JvmStatic
     fun init() {
-        TISVSModules.registerModuleItems()
+        TISVSModules.registerItems()
 
         ITEMS.register()
         TISVSGameRules.register()
@@ -22,4 +23,6 @@ object TISVS {
     @JvmStatic
     fun initClient() {
     }
+
+    fun id(path: String) = ResourceLocation(MOD_ID, path)
 }

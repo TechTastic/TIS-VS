@@ -1,1 +1,2 @@
-Fixed VS Dependency
+# Changelog
+- Fixed Registration Error
