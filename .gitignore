@@ -6,4 +6,5 @@
 /fabric/build/
 /forge/.gradle/
 /common/.gradle/
+/fabric/.gradle/
 /forge/run/
