@@ -1,7 +1,15 @@
 package io.github.techtastic.tisvs.fabric
 
+import dev.architectury.registry.registries.Registries
+import io.github.techtastic.tisvs.TISVS.id
 import io.github.techtastic.tisvs.TISVS.init
 import io.github.techtastic.tisvs.TISVS.initClient
+import io.github.techtastic.tisvs.manual.TISVSManual
+import io.github.techtastic.tisvs.module.TISVSModules
+import io.github.techtastic.tisvs.serial.TISVSSerialInterfaces
+import li.cil.manual.api.util.Constants
+import li.cil.tis3d.api.module.ModuleProvider
+import li.cil.tis3d.api.serial.SerialInterfaceProvider
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -14,6 +22,13 @@ object TISVSFabric: ModInitializer {
         ValkyrienSkiesModFabric().onInitialize()
 
         init()
+
+        TISVSModules.registryCallback { name, supp -> Registries.get("tis3d").get(ModuleProvider.REGISTRY).register(id(name), supp) }
+        TISVSSerialInterfaces.registryCallback { name, supp -> Registries.get("tis3d").get(SerialInterfaceProvider.REGISTRY).register(id(name), supp) }
+
+        TISVSManual.tabRegistryCallback { name, supp -> Registries.get("tis3d").get(Constants.TAB_REGISTRY).register(id(name), supp) }
+        TISVSManual.pathRegistryCallback { name, supp -> Registries.get("tis3d").get(Constants.PATH_PROVIDER_REGISTRY).register(id(name), supp) }
+        TISVSManual.contentRegistryCallback { name, supp -> Registries.get("tis3d").get(Constants.DOCUMENT_PROVIDER_REGISTRY).register(id(name), supp) }
     }
 
     @Environment(EnvType.CLIENT)
