@@ -8,7 +8,9 @@ import io.github.techtastic.tisvs.forge.module.TISVSModules
 import io.github.techtastic.tisvs.forge.serial.TISVSSerialInterfaces
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.inventory.InventoryMenu
+import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.fml.DistExecutor
 import net.minecraftforge.fml.common.Mod
 import thedarkcolour.kotlinforforge.KotlinModLoadingContext
 import java.util.*
@@ -19,7 +21,8 @@ class TISVSForge {
         val bus = KotlinModLoadingContext.get().getKEventBus()
         EventBuses.registerModEventBus(MOD_ID, bus)
 
-        bus.addListener(this::handleTextureStitchEvent)
+        DistExecutor.safeRunWhenOn(Dist.CLIENT)
+        { DistExecutor.SafeRunnable { bus.addListener(this::handleTextureStitchEvent) } }
 
         init()
 
