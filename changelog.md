@@ -1,2 +1,2 @@
 # Changelog
-- Fixed Registration Error
+- Fixed VS2 dependency
