@@ -1,2 +1,3 @@
 # Changelog
-- Fixed Registration Error
+- Fixed client crash
+- Fixed VS dependency conflict

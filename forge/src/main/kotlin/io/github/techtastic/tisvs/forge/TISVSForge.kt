@@ -13,7 +13,9 @@ import li.cil.tis3d.api.module.ModuleProvider
 import li.cil.tis3d.api.serial.SerialInterfaceProvider
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.inventory.InventoryMenu
+import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.fml.DistExecutor
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.registries.RegisterEvent
@@ -28,7 +30,8 @@ class TISVSForge {
         EventBuses.registerModEventBus(MOD_ID, bus)
 
         bus.addListener(this::clientSetup)
-        bus.addListener(this::handleTextureStitchEvent)
+        DistExecutor.safeRunWhenOn(Dist.CLIENT)
+        { DistExecutor.SafeRunnable { bus.addListener(this::handleTextureStitchEvent) } }
         bus.addListener(this::registryCallback)
 
         init()
