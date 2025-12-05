@@ -13,7 +13,8 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.item.MapItem
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.AABB
-import org.valkyrienskies.mod.common.getShipObjectManagingPos
+import org.valkyrienskies.core.api.util.GameTickOnly
+import org.valkyrienskies.mod.common.getLoadedShipManagingPos
 import org.valkyrienskies.mod.common.util.toJOMLD
 import org.valkyrienskies.mod.common.util.toMinecraft
 import java.util.*
@@ -74,10 +75,11 @@ class FramedMapSerialInterfaceProvider: SerialInterfaceProvider {
             outputX = tag.getBoolean("tisvs\$outputX")
         }
 
+        @OptIn(GameTickOnly::class)
         private fun getOffset(): Short {
             val level = frame.level() as ServerLevel
             val pos = frame.onPos
-            val ship = level.getShipObjectManagingPos(pos)
+            val ship = level.getLoadedShipManagingPos(pos)
 
             val testPos = ship?.transform?.shipToWorld?.transformPosition(pos.toJOMLD())?.toMinecraft()
                 ?: pos.toJOMLD().toMinecraft()

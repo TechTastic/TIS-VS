@@ -10,7 +10,7 @@ import li.cil.tis3d.api.prefab.module.AbstractModuleWithRotation
 import li.cil.tis3d.api.util.RenderContext
 import li.cil.tis3d.util.Color
 import net.minecraft.resources.ResourceLocation
-import org.valkyrienskies.mod.common.getShipObjectManagingPos
+import org.valkyrienskies.mod.common.getLoadedShipManagingPos
 import org.valkyrienskies.mod.common.util.toJOMLD
 
 class AltitudeModule(casing: Casing, face: Face): AbstractModuleWithRotation(casing, face) {
@@ -25,7 +25,7 @@ class AltitudeModule(casing: Casing, face: Face): AbstractModuleWithRotation(cas
     fun getAltitude(): Short {
         val level = casing.casingLevel
         val pos = casing.position
-        val ship = level.getShipObjectManagingPos(pos) ?: return HalfFloat.toHalf(pos.y.toFloat())
+        val ship = level.getLoadedShipManagingPos(pos) ?: return HalfFloat.toHalf(pos.y.toFloat())
 
         val worldPos = ship.transform.shipToWorld.transformPosition(pos.toJOMLD())
         return HalfFloat.toHalf(worldPos.y.toFloat())

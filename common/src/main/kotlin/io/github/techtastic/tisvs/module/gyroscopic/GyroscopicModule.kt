@@ -19,9 +19,8 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.Vec3
-import org.joml.Vector3d
 import org.joml.Vector3f
-import org.valkyrienskies.mod.common.getShipObjectManagingPos
+import org.valkyrienskies.mod.common.getLoadedShipManagingPos
 
 class GyroscopicModule(casing: Casing, face: Face): AbstractModuleWithRotation(casing, face) {
     val outputs = mutableMapOf(
@@ -38,7 +37,7 @@ class GyroscopicModule(casing: Casing, face: Face): AbstractModuleWithRotation(c
         QUAT_W;
 
         fun get(level: Level, pos: BlockPos): Short {
-            val ship = level.getShipObjectManagingPos(pos) ?: return HalfFloat.NaN
+            val ship = level.getLoadedShipManagingPos(pos) ?: return HalfFloat.NaN
 
             val rot = ship.transform.shipToWorldRotation
             return HalfFloat.toHalf(when (this) {
