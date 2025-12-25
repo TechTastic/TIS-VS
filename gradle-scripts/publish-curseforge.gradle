@@ -1,7 +1,7 @@
 // Publish to CurseForge
 curseforge {
-    if (project.curse_api_key) {
-        apiKey = project.curse_api_key
+    if (System.getenv("CURSEFORGE_TOKEN") != null) {
+        apiKey = System.getenv("CURSEFORGE_TOKEN")
         project {
             id = project.curse_project_id
             releaseType = 'release'
@@ -32,7 +32,7 @@ curseforge {
 
 // Publish to Modrinth
 modrinth {
-    token = project.modrinth_api_key
+    token = System.getenv("MODRINTH_TOKEN")
     projectId = project.modrinth_project_id
     versionType = "release"
     versionName = 'TIS-VS ' + project.minecraft_version + '-' + project.loader_platform.toLowerCase() + '-' + project.mod_version
