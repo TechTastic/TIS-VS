@@ -53,7 +53,7 @@ dependencies {
 
     // VS Core
     implementation("org.valkyrienskies.core:api:$vs_core_version")
-    implementation("org.valkyrienskies.core:api-game:$vs_core_version")
+    implementation("org.valkyrienskies.core:internal:$vs_core_version")
     implementation("org.valkyrienskies.core:util:$vs_core_version")
     implementation("org.valkyrienskies.core:impl:$vs_core_version")
 
@@ -71,7 +71,7 @@ processResources {
     inputs.property "version", project.version
 
     def props = project.properties
-    props['vs2_version'] = project.vs2_version.substring(0, project.vs2_version.indexOf('+'))
+    props['vs2_version'] = project.vs2_version.contains("+") ? project.vs2_version.substring(0, project.vs2_version.indexOf('+')) : project.vs2_version
     props['forge_version'] = project.forge_version.substring(project.forge_version.indexOf('.') + 1)
 
     filesMatching("META-INF/mods.toml") {
